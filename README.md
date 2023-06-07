@@ -29,5 +29,5 @@ When ready, just run the following in the terminal of the directory where the fi
 python main.py
 ```
 
-## Licsense
-This project uses the Unlicsense. This means you are free to use this code however you like.
+## License
+This project uses the Unlicense. This means you are free to use this code however you like.
