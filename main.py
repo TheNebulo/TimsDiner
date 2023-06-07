@@ -12,12 +12,16 @@ def make_order():
   print(
     "\nOrder like this: Table Number, Item 1, Item 2\nSo for example, 1,4,9 means:\nTable 1 ordered a burger and a milkshake.\n"
   )
-  order = input("Make your order: ")
+  order = input("Make your order (if you want to cancel, type cancel): ")
+  if order.lower() == "cancel":
+    os.system(clear_command)
+    print("Order cancelled.")
+    return
   order = utils.validate_order(order)
   if order == None:
     os.system(clear_command)
-    print("Invalid order!")
-    time.sleep(1.5)
+    print("Invalid order!\nPlease wait a second.")
+    time.sleep(1)
     os.system(clear_command)
     make_order()
   else:
@@ -69,6 +73,10 @@ def edit_menu():
         except ValueError:
           print("Invalid price. Please try again.")
           continue
+        else:
+          if item_price <= 0:
+            print("Invalid price. Please try again.")
+            continue
 
         menu[item_id] = [item_name, item_price]
         utils.save_menu(menu)
@@ -96,6 +104,9 @@ def edit_menu():
 
 
 def print_orders(orders):
+  if orders["orders"] == []:
+    print("No orders have been placed yet.")
+    return
   for order in orders["orders"]:
     print(
       f"Order Number: {order['order_number']}, Table: {order['table']}, Cost: ${order['cost']}"
@@ -194,8 +205,20 @@ while True:
     edit_menu()
 
   elif option.lower() == 'q':
-    print("Goodbye!")
-    break
+    while True:
+      os.system(clear_command)
+      confirm = input("Are you sure you want to quit? (y/n) ")
+      if confirm.lower() == "y":
+        os.system(clear_command)
+        print("Goodbye!")
+        quit()
+      elif confirm.lower() == "n":
+        break
+      else:
+        os.system(clear_command)
+        print("I didn't quite get you. Try again in a second.")
+        time.sleep(1)
+        os.system(clear_command)
 
   else:
     print("Invalid option. Please try again.")
