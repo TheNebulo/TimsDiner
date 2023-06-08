@@ -42,12 +42,12 @@ def edit_menu():
   while True:
     os.system(clear_command)
     print_menu()
-    print("Options:")
+    print("\nOptions:")
     print("1. Add item")
     print("2. Edit item")
     print("3. Delete item")
     print("q. Go back")
-    option = input("Choose an option: ")
+    option = input("\nChoose an option: ")
 
     if option == '1':
       item_name = input("Enter the new item name: ")
